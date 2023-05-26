@@ -1,0 +1,256 @@
+[
+    {
+        "id": "83fe6109ec558b02",
+        "type": "tab",
+        "label": "Estacion climatica",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f10f853edd25d9b3",
+        "type": "mqtt in",
+        "z": "83fe6109ec558b02",
+        "name": "",
+        "topic": "codigoIoT/mqtt/clima",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "01f995b500d9c07c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "601ff234f51e930a"
+            ]
+        ]
+    },
+    {
+        "id": "601ff234f51e930a",
+        "type": "json",
+        "z": "83fe6109ec558b02",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "c1e11fbb361c5c65",
+                "dd1e794fb73bb03f"
+            ]
+        ]
+    },
+    {
+        "id": "c1e11fbb361c5c65",
+        "type": "function",
+        "z": "83fe6109ec558b02",
+        "name": "temperatura",
+        "func": "msg.payload = msg.payload.temp; \nmsg.topic = \"Temperatura\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "c585ea7a47e3c53c",
+                "aaaa8bdf6445cf2b"
+            ]
+        ]
+    },
+    {
+        "id": "dd1e794fb73bb03f",
+        "type": "function",
+        "z": "83fe6109ec558b02",
+        "name": "humedad",
+        "func": "msg.payload = msg.payload.hum; \nmsg.topic = \"Humedad\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 280,
+        "wires": [
+            [
+                "bdccc0ee57893712",
+                "aaaa8bdf6445cf2b"
+            ]
+        ]
+    },
+    {
+        "id": "c585ea7a47e3c53c",
+        "type": "ui_gauge",
+        "z": "83fe6109ec558b02",
+        "name": "",
+        "group": "e67d4e0174273436",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp.",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "45",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 790,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "bdccc0ee57893712",
+        "type": "ui_gauge",
+        "z": "83fe6109ec558b02",
+        "name": "",
+        "group": "e67d4e0174273436",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humedad",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#f6f5f4",
+            "#62a0ea",
+            "#1c71d8"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "aaaa8bdf6445cf2b",
+        "type": "ui_chart",
+        "z": "83fe6109ec558b02",
+        "name": "",
+        "group": "ff281fe67cbd7f1b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temp. y Hum.",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-5",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 820,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "868d1417908e2184",
+        "type": "ui_spacer",
+        "z": "83fe6109ec558b02",
+        "name": "spacer",
+        "group": "e67d4e0174273436",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "01f995b500d9c07c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e67d4e0174273436",
+        "type": "ui_group",
+        "name": "Indicadores",
+        "tab": "c3b53f7052c92dda",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ff281fe67cbd7f1b",
+        "type": "ui_group",
+        "name": "Grafica",
+        "tab": "c3b53f7052c92dda",
+        "order": 2,
+        "disp": true,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c3b53f7052c92dda",
+        "type": "ui_tab",
+        "name": "Clima",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
